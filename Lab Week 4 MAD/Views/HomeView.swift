@@ -78,6 +78,7 @@ struct HomeView: View {
                                                 .font(.subheadline)
                                                 .fontWeight(.semibold)
                                                 .lineLimit(2)
+                                                .multilineTextAlignment(.leading)
                                                 .frame(width: 120, alignment: .leading)
                                                 .foregroundColor(.black)
                                             
@@ -109,3 +110,22 @@ struct HomeView: View {
         }
     }
 }
+#Preview("HomeView - Empty Library") {
+    let vm = AppViewModel()
+    vm.isAuthenticated = true
+    vm.savedBooks = []
+    return HomeView()
+        .environmentObject(vm)
+}
+
+#Preview("HomeView - With Saved Books") {
+    let vm = AppViewModel()
+    vm.isAuthenticated = true
+    vm.savedBooks = [
+        Book(title: "Sample A", author: "Author A", systemImage: "book", pageCount: 100, synopsis: "Synopsis A"),
+        Book(title: "Sample B", author: "Author B", systemImage: "book.fill", pageCount: 200, synopsis: "Synopsis B")
+    ]
+    return HomeView()
+        .environmentObject(vm)
+}
+

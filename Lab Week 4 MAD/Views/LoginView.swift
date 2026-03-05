@@ -38,7 +38,6 @@ struct LoginView: View {
                 .padding(.top, 20)
                 
                 Button(action: {
-                    // Logic not required, just navigate to Home [cite: 95]
                     withAnimation {
                         viewModel.isAuthenticated = true
                     }
@@ -67,3 +66,10 @@ struct LoginView: View {
         }
     }
 }
+#Preview("LoginView") {
+    let vm = AppViewModel()
+    vm.isAuthenticated = false
+    return LoginView()
+        .environmentObject(vm)
+}
+

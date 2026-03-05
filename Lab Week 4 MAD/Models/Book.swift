@@ -5,6 +5,7 @@
 //  Created by Bryan Fernando Dinata on 05/03/26.
 //
 
+import Combine
 import Foundation
 
 struct Book: Identifiable, Hashable {
@@ -45,3 +46,4 @@ class AppViewModel: ObservableObject {
         savedBooks.removeAll { $0.id == book.id }
     }
 }
+

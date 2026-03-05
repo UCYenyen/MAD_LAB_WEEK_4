@@ -56,3 +56,10 @@ struct ProfileView: View {
         }
     }
 }
+#Preview("ProfileView") {
+    let vm = AppViewModel()
+    vm.isAuthenticated = true
+    return ProfileView()
+        .environmentObject(vm)
+}
+
