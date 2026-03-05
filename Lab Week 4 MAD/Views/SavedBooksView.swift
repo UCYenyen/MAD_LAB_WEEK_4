@@ -4,7 +4,6 @@
 //
 //  Created by Bryan Fernando Dinata on 05/03/26.
 //
-
 import SwiftUI
 
 struct SavedBooksView: View {
@@ -25,7 +24,12 @@ struct SavedBooksView: View {
                 } else {
                     List {
                         ForEach(viewModel.savedBooks) { book in
-                            NavigationLink(destination: BookDetailsView(book: book)) { // [cite: 139]
+                            ZStack {
+                                NavigationLink(destination: BookDetailsView(book: book)) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
+                                
                                 HStack(spacing: 15) {
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(Color(UIColor.systemGray6))
@@ -38,19 +42,26 @@ struct SavedBooksView: View {
                                     VStack(alignment: .leading, spacing: 5) {
                                         Text(book.title)
                                             .font(.headline)
+                                            .lineLimit(2)
                                         Text(book.author)
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     }
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        viewModel.removeSavedBook(book)
+                                    }) {
+                                        Image(systemName: "trash")
+                                            .foregroundColor(Color.red.opacity(0.8))
+                                            .frame(width: 40, height: 40)
+                                            .background(Color.red.opacity(0.1))
+                                            .clipShape(Circle())
+                                    }
+                                    .buttonStyle(.borderless)
                                 }
                                 .padding(.vertical, 5)
-                            }
-                            .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
-                                    viewModel.removeSavedBook(book)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
                             }
                         }
                     }

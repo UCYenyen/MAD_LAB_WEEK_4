@@ -25,7 +25,6 @@ struct HomeView: View {
                 
                 if viewModel.savedBooks.isEmpty {
                     VStack {
-                        Spacer()
                         Image(systemName: "bookmark.slash")
                             .font(.system(size: 50))
                             .foregroundColor(.gray)
@@ -36,7 +35,7 @@ struct HomeView: View {
                             .padding(.bottom, 20)
                         
                         Button("Discover Books") {
-                            viewModel.selectedTab = 1 // Navigate to Explore [cite: 111]
+                            viewModel.selectedTab = 1
                         }
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
@@ -46,6 +45,7 @@ struct HomeView: View {
                         
                         Spacer()
                     }
+                    .padding(.top, 20)
                     .frame(maxWidth: .infinity)
                 } else {
                     VStack(alignment: .leading) {
